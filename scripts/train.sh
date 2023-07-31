@@ -1,0 +1,22 @@
+accelerate launch --config_file /data/lzj/LLaMA-Efficient-Tuning/scripts/accelerate.yaml src/train_bash.py \
+    --stage pt \
+    --model_name_or_path /data/lzj/LLaMA-Efficient-Tuning/Baichuan-13B-Chat \
+    --do_train \
+    --prompt_template baichuan \
+    --dataset finance_test \
+    --finetuning_type lora \
+    --output_dir modeltest0724 \
+    --lora_target W_pack,o_proj,gate_proj,up_proj,down_proj \
+    --overwrite_cache \
+    --per_device_train_batch_size 4 \
+    --gradient_accumulation_steps 4 \
+    --lr_scheduler_type cosine \
+    --lora_rank 32 \
+    --lora_alpha 64 \
+    --logging_steps 10 \
+    --save_steps 100 \
+    --learning_rate 5e-5 \
+    --num_train_epochs 5.0 \
+    --max_grad_norm 0.5 \
+    --plot_loss \
+    --fp16
